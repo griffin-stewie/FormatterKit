@@ -28,6 +28,7 @@ NS_ENUM(NSUInteger, URLRequestFormatterViewControllerSectionIndexes) {
     StandardSectionIndex,
     cURLSectionIndex,
     WgetSectionIndex,
+    HTTPSectionIndex,
 };
 
 @interface URLRequestFormatterViewController ()
@@ -60,7 +61,7 @@ NS_ENUM(NSUInteger, URLRequestFormatterViewControllerSectionIndexes) {
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(__unused UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(__unused UITableView *)tableView
@@ -77,6 +78,8 @@ titleForHeaderInSection:(NSInteger)section
             return NSLocalizedString(@"cURL Command", nil);
         case WgetSectionIndex:
             return NSLocalizedString(@"Wget Command", nil);
+        case HTTPSectionIndex:
+            return NSLocalizedString(@"HTTPie Command", nil);
         default:
             return nil;
     }
@@ -92,6 +95,8 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
             break;
         case WgetSectionIndex:
             command = [TTTURLRequestFormatter WgetCommandFromURLRequest:self.request];
+        case HTTPSectionIndex:
+            command = [TTTURLRequestFormatter HTTPieCommandFromURLRequest:self.request];
             break;
         default:
             return tableView.rowHeight;
@@ -128,6 +133,9 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
             break;
         case WgetSectionIndex:
             cell.textLabel.text = [TTTURLRequestFormatter WgetCommandFromURLRequest:self.request];
+            break;
+        case HTTPSectionIndex:
+            cell.textLabel.text = [TTTURLRequestFormatter HTTPieCommandFromURLRequest:self.request];
             break;
     }
 }
