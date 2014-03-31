@@ -54,6 +54,12 @@
  */
 + (NSString *)WgetCommandFromURLRequest:(NSURLRequest *)request;
 
+/**
+ Returns a `http` command string equivalent of the specified request object.
+ 
+ @param request The request to format.
+ */
++ (NSString *)HTTPieCommandFromURLRequest:(NSURLRequest *)request;
 @end
 
 #pragma mark -

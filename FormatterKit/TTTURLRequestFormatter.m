@@ -94,6 +94,16 @@
     }
 
     [command appendCommandLineArgument:[NSString stringWithFormat:@"\"%@\"", [[request URL] absoluteString]]];
+    return [NSString stringWithString:command];
+}
+
++ (NSString *)HTTPieCommandFromURLRequest:(NSURLRequest *)request {
+    NSMutableString *command = [NSMutableString stringWithString:@"http"];
+    
+    [command appendCommandLineArgument:[NSString stringWithFormat:@"-v %@", [request HTTPMethod]]];
+    
+    [command appendCommandLineArgument:[NSString stringWithFormat:@"\"%@\"", [[request URL] absoluteString]]];
+
 
     return [NSString stringWithString:command];
 }
